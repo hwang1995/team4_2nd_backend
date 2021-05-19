@@ -1,0 +1,49 @@
+<link rel="stylesheet" href="../../assets/css/layout/sidebarLayout.css">
+<div class="d-flex">
+  <ng-include src="'views/dashboard/sider.html'"></ng-include>
+
+  <section class="p-3 w-100">
+    <!-- 여기에 내용을 입력하세요. -->
+    <h1 class="fw-9 mt-3 ">회원 수정</h1>
+    <hr class="divider mb-4">
+      <label for="staticEmail" class="col-sm-2 col-form-label">이메일</label>
+      <div class="col-sm-10 mb-2">
+        <input type="text" readonly class="form-control-plaintext" id="staticEmail" value="{{member.member_email}}">
+      </div>
+      <label class="col-sm-2 col-form-label">이름</label>
+      <div class="col-sm-10 mb-2">
+        <input type="text" class="form-control" id="modifiedName" ng-model="member.member_name">
+      </div>
+      <label class="col-sm-2 col-form-label">전화번호</label>
+      <div class="col-sm-10 mb-2">
+        <input type="tel" class="form-control" id="modifiedTel" ng-model="member.member_tel">
+      </div>
+      <label class="col-sm-2 col-form-label">주소</label>
+      <div class="col-sm-10 mb-2">
+        <input type="text" class="form-control" id="modifiedAddress" ng-model="member.member_address">
+      </div>
+      <div class="mb-2">
+        <label class="col-sm-2 col-form-label">계정 활성화</label>
+        <div class="d-flex">
+        <div class="form-check me-3">
+          <input class="form-check-input" name="member_enabled" ng-model="member.member_enabled" value="true" type="radio" name="flexRadioDefault" id="flexRadioDefault2" ng-checked="member.member_enabled === true">
+          <label class="form-check-label">
+            활성화
+          </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" name="member_enabled" ng-model="member.member_enabled" value="false" type="radio" name="flexRadioDefault" id="flexRadioDefault1" ng-checked="member.member_enabled === false">
+          <label class="form-check-label">
+            비활성화
+          </label>
+        </div>
+      </div>
+      </div>
+      <button class="btn btn-sm btn-primary" ng-click="cancel()" style="width: 100px;">
+        <h5 class="fw-7">취소</h5>
+      </button>
+      <button class="btn btn-sm btn-primary" ng-click="modify(member)" style="width: 100px;">
+        <h5 class="fw-7">저장</h5>
+      </button>
+  </section>
+</div>

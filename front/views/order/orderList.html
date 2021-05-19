@@ -1,0 +1,98 @@
+<div class="body">
+  <h1 class="fw-9 mt-3 ">주문 관리</h1>
+    <hr class="divider mb-3">
+      <div class="d-flex bold_divider p-2">
+        <div class="fw-7 ms-4" style="text-align: center;">검색어</div>
+        <div class="ms-4">
+          <select class="ps-1" ng-model="searchBy" ng-change="searchChange()" style="width: 100px;">
+            <option value=null>전체</option>
+            <option value="orderId">주문번호</option>
+            <option value="delivery">배송상태</option>
+          </select>
+        </div>
+        <div class="ms-4">
+          <input ng-show="searchBy=='orderId'" type="number" ng-model="model.orderId" style="width: 176px;">
+          <form ng-show="searchBy=='delivery'" >
+            <label>
+              <input type="radio" ng-model="model.delivery" value="DELIVERY_COMPLETED">
+              배송완료
+            </label>
+            <label class="ms-3">
+              <input type="radio" ng-model="model.delivery" value="DELIVERY_PENDING">
+              배송준비중
+            </label>
+          </form>
+        </div>
+        <div class="ms-4" ng-show="searchBy">
+          <button class="btn btn-primary btn-sm" style="width: 100px; height: max-content;" ng-click="searchListBtn(1 ,model)">검색</button>
+        </div>
+      </div>
+
+  <table class="table table-hover border text-center mt-4">
+    <thead>
+      <tr class="table-secondary">
+        <th scope="col">주문번호</th>
+        <th scope="col">주문날짜</th>
+        <th scope="col">결제상태</th>
+        <th scope="col">배송상태</th>
+        <th scope="col">상세보기</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="table-bordered" ng-repeat="order in orders">
+        <td scope="row">{{order.order_id}}</td>
+        <td scope="row"><a ng-click="read(product.pid)" href=""></a>{{order.order_date | date:"yyyy.MM.dd"}}</td>
+        <td ng-if="order.order_payment_status == 'PAYMENT_FINISHED'" scope="row">결제완료</td>
+        <td ng-if="order.order_payment_status == 'PAYMENT_PENDING'" scope="row">결제보류</td>
+        <td ng-if="order.order_delivery_status == 'DELIVERY_COMPLETED'" scope="row">배송완료</td>
+        <td ng-if="order.order_delivery_status == 'DELIVERY_PENDING'" scope="row">배송준비중</td>
+        <td scope="row"><button class="btn btn-sm btn-primary" ng-click="read(order.order_id)" style="width: max-content; height: min-content;">보기</button></td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="d-flex justify-content-center" ng-show="searchBy==null">
+    <nav >
+      <ul class="pagination justify-content-center" >
+        <li class="page-item">
+          <a class="page-link" ng-click="getList(1)">처음</a>
+        </li>
+        <li class="page-item">
+          <a class="page-link" ng-show="pager.groupNo>1" ng-click="getList(pager.startPageNo-1)">이전</a>
+        </li>
+        <li class="page-item {{(pager.pageNo==i)?'active':''}} {{!$last?'mr-1':''}}" ng-repeat="i in pageRange">
+          <a class="page-link"  ng-click="getList(i)" >{{i}}</a>
+        </li>
+        <li class="page-item">
+          <a class="page-link" ng-show="pager.groupNo < pager.totalGroupNo" ng-click="getList(pager.endPageNo+1)">다음</a>
+        </li>
+        <li class="page-item">
+          <a class="page-link" ng-click="getList(pager.totalPageNo)">맨끝</a>
+        </li>
+      
+      </ul>
+    </nav>
+    </div>
+    
+  </div>
+  <div class="d-flex justify-content-center" ng-show="searchBy!=null">
+    <nav >
+      <ul class="pagination justify-content-center" >
+        <li class="page-item">
+          <a class="page-link" ng-click="searchListBtn(1, model)">처음</a>
+        </li>
+        <li class="page-item">
+          <a class="page-link" ng-show="pager.groupNo>1" ng-click="searchListBtn(pager.startPageNo-1, model)">이전</a>
+        </li>
+        <li class="page-item {{(pager.pageNo==i)?'active':''}} {{!$last?'mr-1':''}}" ng-repeat="i in pageRange">
+          <a class="page-link"  ng-click="searchListBtn(i, model)" >{{i}}</a>
+        </li>
+        <li class="page-item">
+          <a class="page-link" ng-show="pager.groupNo < pager.totalGroupNo" ng-click="searchListBtn(pager.endPageNo+1, model)">다음</a>
+        </li>
+        <li class="page-item">
+          <a class="page-link" ng-click="searchListBtn(pager.totalPageNo, model)">맨끝</a>
+        </li>
+      
+      </ul>
+    </nav>
+</div>

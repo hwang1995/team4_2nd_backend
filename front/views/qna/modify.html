@@ -1,0 +1,54 @@
+<link rel="stylesheet" href="../../assets/css/layout/sidebarLayout.css">
+<div class="d-flex">
+  <ng-include src="'views/dashboard/sider.html'"></ng-include>
+
+  <section class="p-3 w-100">
+    <h2 class="fw-5 mt-3 ">Q&A 수정</h2>
+    <hr class="divider mb-2">
+    <div style="margin-left: 100px;margin-right: 100px;">
+      <div class="form-group">
+          <label>E-mail:</label>
+          <input class="form-control" ng-value="qna.member_email" readonly/>
+      </div>
+      <div class="form-group mt-1" ng-show="qna.qna_category=='products'">
+          <label>분류:</label>
+          <input class="form-control" value="상품문의" readonly/>
+      </div>
+      <div class="form-group mt-1" ng-show="qna.qna_category=='delivery'">
+          <label>분류:</label>
+          <input class="form-control" value="배송문의" readonly/>
+      </div>
+      <div class="form-group mt-1" ng-show="qna.qna_category=='exchange'">
+          <label>분류:</label>
+          <input class="form-control" value="교환문의" readonly/>
+      </div>
+      <div class="form-group mt-1" ng-show="qna.qna_category=='etc'">
+          <label>분류:</label>
+          <input class="form-control" value="기타문의" readonly/>
+      </div>
+      <div class="form-group mt-1">
+          <label>제목:</label>
+          <input class="form-control" ng-value="qna.qna_title" readonly/>
+      </div>
+      <div class="form-group mt-1">
+        <label>내용:</label>
+        <textarea class="form-control" ng-value="qna.qna_content" style="height: 150px;" readonly></textarea>
+      </div>
+      <div class="form-group mt-1">
+        <label class="fw-7">답변:</label>
+        <textarea class="form-control" ng-model="qna.qna_answer" style="height: 150px;"></textarea>
+      </div>
+      <div class="d-flex justify-content-center mt-3">
+        <button class="btn btn-secondary btn-sm mx-2" ng-click="getList(pager.pageNo)" style="width: 150px;">
+          <h5 class="fw-7">목록</h5> 
+        </button>
+        <button ng-disabled="qna.qna_answer==''" class="btn btn-secondary btn-sm mx-2" ng-click="updateQna(qna)" style="width: 150px;">
+          <h5 class="fw-7">저장</h5> 
+        </button> 
+        <button class="btn btn-secondary btn-sm mx-2" ng-click="cancel(qna.qna_id)" style="width: 150px;">
+         <h5 class="fw-7">취소</h5> 
+        </button>
+      </div>
+    </div>
+  </section>
+</div>

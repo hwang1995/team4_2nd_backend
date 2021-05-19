@@ -1,0 +1,203 @@
+/* 
+    common.css는 웹 사이트의 필요한 기본적인 요소들을
+    컴포넌트화 하여 작성한 CSS 파일입니다.
+    예를 들어 웹 사이트의 버튼, 폰트를 적용한 텍스트 등을 정의합니다.
+    사용한 폰트
+    1. 'Raleway', sans-serif; [영문 폰트]
+    2. 'Noto Sans KR', sans-serif; [한글 폰트]
+*/
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@100;200;300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap');
+
+/*
+    [한글 폰트]
+    h1~h6, p, span 태그의 폰트를
+    'Noto Sans KR'로 전환하고, 
+    여백을 -1px 줄여서 기본값으로 설정
+*/
+
+
+html, body, h1, h2, h3, h4, h5, h6, p, span, input {
+    font-family: 'Noto Sans KR',-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    letter-spacing: -1px;
+}
+
+.engFont {
+  font-family: 'Raleway', 'Noto Sans KR', sans-serif;
+  letter-spacing: -0.5px;
+  margin : 0;
+}
+/**
+ .fw-9 (fontweight-9xx)의 뜻
+ 폰트의 두께를 정할 때 사용
+*/
+.fw-9 { font-weight : 900; }
+.fw-7 { font-weight : 700; }
+.fw-5 { font-weight : 500; }
+.fw-4 { font-weight : 400; }
+.fw-3 { font-weight : 300; }
+.fw-1 { font-weight : 100; }
+
+
+
+
+.text_underline {
+    text-decoration: underline;
+}
+
+
+/*
+    select 기본 속성 변경
+    사용법
+    1) select 폭이 100%가 필요하다면?
+    <select class="select_item">
+*/
+
+select {
+    border : 1px solid #c7c7c7;
+    background : url('../svg/arrow-down-circle.svg') no-repeat 95% 50%;
+    -webkit-appearance: none;
+    appearance: none;
+    border-radius : 5px;
+}
+
+.select_item {
+    height : 2.5rem;
+    padding : 0.2rem;
+    width : 100%;
+}
+
+/*
+    button 기본 속성 변경
+    사용법
+    1) 흰색 버튼을 만들고 싶다면?
+    <button class="white_button">
+    2) 검은 버튼을 만들고 싶다면?
+    <button class="black_button">
+*/
+button {
+    border : 1px solid grey;
+    height : 3rem;
+    width : 100%;
+    text-align : center;
+}
+
+
+.white_button {
+    background-color: white;
+    color : black;
+
+}
+
+/* 
+.white_button:hover {
+    background-color : black;
+    color : white;
+    transition: all 0.425s cubic-bezier(0.7, 0, 0.3, 1);
+} */
+
+
+.black_button {
+    background-color : black;
+    color : white;
+}
+
+/* .black_button:hover {
+    background-color : white;
+    color : black;
+    transition: all 0.425s cubic-bezier(0.7, 0, 0.3, 1);
+}  */
+
+
+/*
+    divider 기본 속성 설정
+    사용법 : <hr class="divider">
+*/
+.divider {
+    border : 1px solid #343a40;
+}
+
+.bold_divider {
+    border : 2px solid #212529;
+}
+
+.vertical_divider {
+    border-left : 1px solid #343a40;
+}
+
+/*
+    width 기본 속성 설정
+    <div class="w-30"/>
+*/
+
+.w-10 { width : 10%; }
+.w-20 { width : 20%; }
+.w-30 { width : 30%; }
+.w-40 { width : 40%; }
+.w-60 { width : 60%; }
+.w-70 { width : 70%; }
+.w-80 { width : 80%; }
+.w-90 { width : 90%; }
+
+/*
+    margin 기본 속성 값 설정
+    <div class="mt-8 mb-8"/>
+    mt-n은 margin-top
+    mb-n은 margin-bottom
+    mtb-n은 margin-top & bottom 동시 적용
+*/
+
+.mt-6 { margin-top : 4rem; }
+.mt-7 { margin-top : 5rem; }
+.mt-8 { margin-top : 6rem; }
+
+.mb-6 { margin-bottom : 4rem; }
+.mb-7 { margin-bottom : 5rem; }
+.mb-8 { margin-bottom : 6rem; }
+
+.mtb-6 {
+    margin-top : 4rem;
+    margin-bottom : 4rem;
+}
+.mtb-7 {
+    margin-top : 5rem;
+    margin-bottom : 5rem;
+}
+.mtb-8 {
+    margin-top : 6rem;
+    margin-bottom : 6rem;
+}
+
+.p-6 { padding : 4rem; }
+.p-7 { padding : 5rem; }
+.p-8 { padding : 6rem; }
+
+/**
+    scrollbar css 효과 주기
+*/
+
+::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+   }
+::-webkit-scrollbar-thumb {
+    background: #adb5bd;
+    border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: #adb5bd;
+}
+::-webkit-scrollbar-track {
+    background: #ffffff;
+    border-radius: 10px;
+    box-shadow: inset 7px 10px 12px #f0f0f0;
+}
+
+
+.white_text {
+    color : white;
+}
+
+.cursor_pointer {
+	cursor : pointer;
+}

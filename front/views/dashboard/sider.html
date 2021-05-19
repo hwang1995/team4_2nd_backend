@@ -1,0 +1,72 @@
+<header>
+  <nav class="sider">
+    <div class="p-3 " style="width: 280px;">
+      <a href="/" class="d-flex align-items-center pb-3 mb-3 link-dark text-decoration-none border-bottom">
+        &nbsp;<img src="../../assets/svg/asterisk.svg" width="20" />
+        <span class="fs-5 fw-semibold m-1"> TEAM 4 </span>
+      </a>
+      <ul class="list-unstyled ps-0">
+        <li class="mb-1">
+          <button class="btn btn-toggle align-items-center rounded collapsed" ng-click="goPage('/admin')">
+            <a class="fw-7">대쉬보드</a>
+          </button>
+        </li>
+        <li class="mb-1">
+          <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#home-collapse" aria-expanded="false">
+            상품관리
+          </button>
+          <div class="collapse" id="home-collapse">
+            <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+              <li><a href="/#!/admin/product/add" class="link-dark rounded fw-7">상품 등록</a></li>
+              <li><a href="/#!/admin/product" class="link-dark rounded fw-7">상품 목록</a></li>
+            </ul>
+          </div>
+        </li>
+        <li class="mb-1">
+          <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#dashboard-collapse" aria-expanded="false">
+            주문관리
+          </button>
+          <div class="collapse" id="dashboard-collapse">
+            <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+              <li><a href="/#!/admin/order" class="link-dark rounded fw-7" ng-click="reloadable('admin/order')">주문 목록</a></li>
+    
+            </ul>
+          </div>
+        </li>
+        <li class="mb-1">
+          <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#orders-collapse" aria-expanded="false">
+            고객관리
+          </button>
+          <div class="collapse" id="orders-collapse">
+            <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+              <li><a href="/#!/admin/member" class="link-dark rounded fw-7" ng-click="reloadable('admin/member')">회원 목록</a></li>
+    
+            </ul>
+          </div>
+        </li>
+        <li class="mb-1">
+          <button class="btn btn-toggle align-items-center rounded collapsed fw-7" data-bs-toggle="collapse" data-bs-target="#qna-collapse" aria-expanded="false">
+            Q&A
+          </button>
+          <div class="collapse" id="qna-collapse">
+            <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+              <li><a href="/#!/admin/qna/index" class="link-dark rounded fw-7" ng-click="reloadable('admin/qna/index')">Q&A 목록</a></li>
+    
+            </ul>
+          </div>
+        </li>
+        <li class="border-top my-3"></li>
+        <li class="mb-1">
+          <h6 class="fw-7 engFont">Welcome. {{email}}</h6>
+        </li>
+      </ul>
+      <div class="d-flex fixed-bottom m-3" >
+        <a href="#" ng-click="logout()" style="bottom: 0px;">
+        <img src="/assets/svg/door-closed.svg" ng-click="logout()"> 
+        <span class="fw-7 engFont">&nbsp;Logout</span>
+        </img>
+      </a>
+    </div>
+    </div>
+  </nav>
+</header>

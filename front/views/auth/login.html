@@ -1,0 +1,24 @@
+<link rel="stylesheet" href="../../assets/css/layout/loginLayout.css">
+<div class="text-center loginContainer" style="height : 100vh;">
+  <main class="form-signin">
+    <form novalidate>
+      <img class="mb-3" src="../../assets/images/team4.png" alt="" width="200">
+      <h1 class="fw-9 mb-3" ng-show="!email">로그인</h1>
+     
+  
+      <div class="form-floating" ng-show="!email">
+        <input type="email" class="form-control" id="emailInput" placeholder="name@example.com" ng-model="user.email">
+        <label for="floatingInput">이메일 주소</label>
+      </div>
+      <div class="form-floating" ng-show="!email">
+        <input type="password" class="form-control" id="passwordInput" placeholder="Password" ng-model="user.password">
+        <label for="floatingPassword">비밀번호</label>
+      </div>
+
+      <button class="w-100 btn btn-lg btn-primary" ng-click="login(user)" ng-show="!email"><span class="fw-7">로그인</span></button>
+      <button class="w-100 btn btn-lg btn-danger mt-2" ng-click="registerForm()" type="submit" ng-show="!email"><span class="fw-7" >회원가입</span></button>
+    </form>
+    <a href="/#!/admin" ng-show="email" class="btn btn-primary btn-lg">대쉬보드로 가기</a>
+    <p class="mt-5 mb-3 text-muted">&copy; 2017–2021</p>
+  </main>
+</div>

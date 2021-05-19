@@ -1,0 +1,91 @@
+<div class="body">
+  <h1 class="fw-9 mt-3">주문 상세 정보</h1>
+  <hr class="divider mb-3">
+    <div>
+      <h3 class="fw-5 mt-2">주문 정보</h3>
+
+      <div class="bold_divider ps-4 pt-1 pb-1 mt-2" ng-value="order">
+        <div class="row">
+          <div class="col-3">- 주문번호 : {{order.order_id}}</div>
+          <div class="col-9">- 이메일 : {{member.member_email}}</div>
+        </div>
+        <div class="row">
+          <div class="col-3">- 주문자 : {{member.member_name}}</div>
+          <div class="col-9" ng-if="order.order_payment_status == 'PAYMENT_FINISHED'">- 결제상태 : 결제완료</div>
+          <div class="col-9" ng-if="order.order_payment_status == 'PAYMENT_PENDING'">- 결제상태 : 결제보류</div>
+        </div>
+        <div class="row">
+          <div class="col-3">- 주문날짜 : {{order.order_date | date:"yyyy.MM.dd"}}</div>
+          <div class="col-9" ng-if="order.order_delivery_status == 'DELIVERY_COMPLETED'">- 배송상태 : 배송완료</div>
+          <div class="col-9" ng-if="order.order_delivery_status == 'DELIVERY_PENDING'">- 배송상태 : 배송준비중</div>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <h3 class="fw-5 mt-5">주문 상품</h3>
+      <table class="table table-bordered text-center bold_divider mt-2">
+        <thead>
+          <tr class="table-secondary">
+            <th scope="col" style="border-right:1px solid;">#</th>
+            <th scope="col" style="border-right:1px solid;">상품번호</th>
+            <th scope="col" style="border-right:1px solid;">상품명 ( 색상 / 사이즈 )</th>
+            <th scope="col" style="border-right:1px solid;">상품가격 ( 원 )</th>
+            <th scope="col">수량</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="product in products" style="border: 1px solid;">
+            <th scope="row" style="border-right:1px solid;">{{$index + 1}}</th>
+            <td scope="row" style="border-right:1px solid;">{{product.product_id}}</td>
+            <td scope="row" style="border-right:1px solid;">{{product.product_name}} ( {{product.product_color}} / {{product.product_size}} )</td>
+            <td scope="row" style="border-right:1px solid;">{{product.product_price | number}}</td>
+            <td scope="row">{{product.product_quantity}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="d-flex justify-content-end">
+      <span>+ 배송비 ( {{order.order_delivery_charge}} 원 ) = </span>
+      <h5 class="fw-5 ms-2"> 총 가격 {{totalPrice | number}} 원</h5>
+    </div>
+   
+    <div>
+      <div class="row justify-content-between mt-5">
+        <div class="col-5">
+          <h3 class="fw-5">배송 정보</h3>
+        </div>
+        <div class="col-1" style="text-align: right;">
+          <button class="btn btn-success btn-sm" style="width: max-content; height: max-content;" ng-click="modifyForm()">수정</button>
+        </div>
+      </div>
+      <div class="bold_divider  ps-4 pt-1 pb-1 mt-2">
+        <div class="row">
+          <div class="col-2 fw-7">수취인</div>
+          <div class="col-4">{{order.recipient_name}}</div>
+        </div>
+        <div class="row">
+          <div class="col-2 fw-7">연락처</div>
+          <div class="col-4">{{order.recipient_tel}}</div>
+        </div>
+        <div class="row">
+          <div class="col-2 fw-7">주소</div>
+          <div class="col-4">{{order.recipient_address}}</div>
+        </div>
+        <div class="row">
+          <div class="col-2 fw-7">배송상태</div>
+          <div class="col-4" ng-if="order.order_delivery_status == 'DELIVERY_COMPLETED'">배송완료</div>
+          <div class="col-4" ng-if="order.order_delivery_status == 'DELIVERY_PENDING'">배송준비중</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="d-flex justify-content-center mt-3">
+      <button class="btn btn-primary" style="width: 100px;" ng-click="getList(1)">
+       <h5 class="fw-7">목록</h5>
+        
+      </button>
+    </div>
+    
+</div>

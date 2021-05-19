@@ -1,0 +1,106 @@
+<link rel="stylesheet" href="../../assets/css/layout/sidebarLayout.css">
+<div class="d-flex">
+  <ng-include src="'views/dashboard/sider.html'"></ng-include>
+
+  <section class="p-3 w-100">
+    <!--  -->
+    <div ng-show="!isLoaded" class="d-flex justify-content-center align-items-center w-100 h-100 flex-column"> 
+      <div class="spinner-border" style="width: 3rem; height: 3rem;" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+
+      <p class="fw-7 mt-3 engFont">Loading...</p>
+    </div>
+    <div ng-show="isLoaded">
+      <div class="p-3 mb-2 bg-light rounded-3 h-100">
+        <div class="container-fluid py-2">
+          <h1 class="engFont fw-7 mt-3 mb-3">Dashboard Status</h1>
+  
+          <hr class="divider">
+  
+          <div class="row">
+            <div class="col-xs-6 col-md-4">
+              <div class="roundedContainer w-100 p-3 mt-2">
+                <h4 class="fw-7 text-center mt-2">회원 수</h4>
+                <a href="/#!/admin/member">
+                  <h1 class="fw-7 text-center text-white mt-3 text_underline">{{totalMembers}}</h1>
+                </a>
+              </div>
+            </div>
+  
+            <div class="col-xs-6 col-md-4">
+              <div class="roundedContainer w-100 p-3 mt-2">
+                <h4 class="fw-7 text-center mt-2">Q&A 답변 대기중</h4>
+                <a href="/#!/admin/qna/index">
+                  <h1 class="fw-7 text-center text-white mt-3 text_underline">{{totalQnaWaiting}}</h1>
+                </a>
+              </div>
+            </div>
+  
+            <div class="col-xs-6 col-md-4">
+              <div class="roundedContainer w-100 p-3 mt-2">
+                <h4 class="fw-7 text-center mt-2">Q&A 답변 완료</h4>
+                <a href="/#!/admin/qna/index">
+                  <h1 class="fw-7 text-center text-white mt-3 text_underline">{{totalQnaFinished}}</h1>
+                </a>
+              </div>
+            </div>
+  
+          </div>
+  
+  
+          <div class="row">
+            <div class="col-xs-6 col-md-4">
+              <div class="roundedContainer w-100 p-3 mt-2">
+                <h4 class="fw-7 text-center mt-2">상품 수</h4>
+                <a href="/#!/admin/product">
+                  <h1 class="fw-7 text-center text-white mt-3 text_underline">{{totalProducts}}</h1>
+                </a>
+              </div>
+            </div>
+            
+            <div class="col-xs-6 col-md-4">
+              <div class="roundedContainer w-100 p-3 mt-2">
+                <h4 class="fw-7 text-center mt-2">배송 준비중</h4>
+                <a href="/#!/admin/order">
+                  <h1 class="fw-7 text-center text-white mt-3 text_underline">{{totalDeliveryWaiting}}</h1>
+                </a>
+              </div>
+            </div>
+  
+            <div class="col-xs-6 col-md-4">
+              <div class="roundedContainer w-100 p-3 mt-2">
+                <h4 class="fw-7 text-center mt-2">배송 완료</h4>
+                <a href="/#!/admin/order">
+                  <h1 class="fw-7 text-center text-white mt-3 text_underline">{{totalDeliveryFinished}}</h1>
+                </a>
+              </div>
+            </div>
+  
+          </div>
+          <h1 class="engFont fw-7 mt-4 mb-3">Daily Sales Chart </h1>
+          <hr class="divider">
+          <h6 class="fw-9 mb-3">(단위 : 만원)</h6>
+          
+        <canvas class="chart chart-line" chart-data="data" chart-labels="labels" chart-options="options"
+        chart-series="series" chart-click="onClick" style="width : 800px"></canvas> 
+        </div>
+        <!-- Chart -->
+
+
+    </div>
+
+    </div>
+   
+
+  </section>
+</div>
+
+<style>
+  .roundedContainer {
+    border-radius: 10px;
+    background-color : #343a40;
+    height : 10rem;
+    color : white;
+  }
+</style>

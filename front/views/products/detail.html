@@ -1,0 +1,227 @@
+<link rel="stylesheet" href="../../assets/css/layout/sidebarLayout.css">
+<div class="d-flex">
+  <ng-include src="'views/dashboard/sider.html'"></ng-include>
+
+  <section class="p-3 w-100">
+    <!-- 여기에 내용을 입력하세요. -->
+    <h1 class="fw-9 mt-3 mb-4">상품 상세 정보</h1>
+    <hr class="divider mb-3">
+    <div class="row">
+      <div class="col-xs-12 col-md-4" >
+        <span class="fw-7 m-3 ">품번</span>
+        <span class="fw-7">{{productInfo.product_id}}</span>
+        
+      </div>
+      <div class="col-xs-12 col-md-4">
+        <span class="fw-7 m-3">이름</span>
+        <span class="fw-7 engFont">{{productInfo.product_name}}</span>
+        </div>
+      <div class="col-xs-12 col-md-4">
+        <span class="fw-7 m-3">가격</span>
+        <span class="fw-7">{{productInfo.product_price | number}} 원</span>
+        </div>
+    </div>
+    <hr class="divider mb-3">
+    <div class="row">
+      <div class="col-xs-12 col-md-4">
+        <span class="fw-7 m-3">사이즈</span>
+        <span class="fw-7 engFont" ng-repeat="size in productInfo.product_sizes_list" ng-if="!$last">
+          {{size.size_name}},
+        </span>
+        <span class="fw-7 engFont" ng-repeat="size in productInfo.product_sizes_list" ng-if="$last">
+          {{size.size_name}}
+        </span>
+        
+      </div>
+      <div class="col-xs-12 col-md-4">
+        <span class="fw-7 m-3">색상</span>
+        <span class="fw-7 engFont" ng-repeat="color in productInfo.product_colors_list" ng-if="!$last">
+          {{color.color_name}},
+        </span>
+        <span class="fw-7 engFont" ng-repeat="color in productInfo.product_colors_list" ng-if="$last">
+          {{color.color_name}}
+        </span>
+        </div>
+   
+    </div>
+
+    <hr class="divider mb-3">
+    <div class="row">
+      <div class="col-xs-12 col-md-4 m-md-2">
+        <h5 class="fw-7 mb-3">주요 설명</h5>
+        <p class="fw-3" ng-repeat="content in productContents">{{content}} </p>
+      </div>
+      <div class="col-xs-12 col-md-4 m-md-1 mt-3">
+        <h5 class="fw-7 mb-3">부가 설명</h5>
+        <p class="fw-3" ng-repeat="content in productSubContents">{{content}} </p>
+      </div>
+    </div>
+    <hr class="divider mb-3">
+    <div class="row" >
+      <div class="col-xs-12 col-md-4 ">
+        <h5 class="fw-7 mb-3">메인 이미지</h5>
+        <img src="{{getImagePath(productInfo.product_image)}}" alt="" width="100%" >
+      </div>
+      <div class="col-xs-12 col-md-4 ">
+        <h5 class="fw-7 mb-3">캐러셀 이미지 </h5>
+        
+        </h5>
+        <div id="carouselImage" class="carousel slide">
+          <div class="carousel-inner">
+            <div class="carousel-item active" ng-repeat="image in productInfo.product_imgs_carousel_list" ng-if="$first" >
+              <img ng-src={{getImagePath(image.product_img_name)}} class="d-block w-100" alt="{{image.product_img_id}}">
+            </div>
+    
+            <div class="carousel-item" ng-repeat="image in productInfo.product_imgs_carousel_list" ng-if="!$first" >
+              <img ng-src={{getImagePath(image.product_img_name)}} class="d-block w-100" alt="{{image.product_img_id}}">
+            </div>
+
+          </div>
+       </div>
+      </div>
+      <div class="col-xs-12 col-md-4">
+        <h5 class="fw-7 mb-3">상세 이미지</h5>
+        <div id="detailImage" class="carousel slide">
+          <div class="carousel-inner">
+            <div class="carousel-item active" ng-repeat="image in productInfo.product_imgs_detail_list" ng-if="$first" >
+              <img ng-src={{getImagePath(image.product_img_name)}} class="d-block w-100" alt="{{image.product_img_id}}">
+            </div>
+    
+            <div class="carousel-item" ng-repeat="image in productInfo.product_imgs_detail_list" ng-if="!$first" >
+              <img ng-src={{getImagePath(image.product_img_name)}} class="d-block w-100" alt="{{image.product_img_id}}">
+            </div>
+            
+          </div>
+       </div>
+      </div>
+    </div>
+    <div class="row d-flex justify-content-end">
+      <div class="col-xs-6 col-md-2">
+        <button class="btn btn-group-lg btn-outline-light mt-3" ng-click="goProductPage()">
+          <h5 class="fw-7 d-flex align-items-center justify-content-center">
+            <img src="../../assets/svg/list.svg" alt="" width="25" class="me-3">
+            <span class="text-dark text_underline">목록</span>
+            
+          </h5>
+        </button>
+      </div>
+      <div class="col-xs-6 col-md-2">
+        <button class="btn btn-group-lg btn-outline-light mt-3" data-bs-toggle="modal" data-bs-target="#modifyModal" id="openModal">
+          <h5 class="fw-7 d-flex align-items-center justify-content-center">
+            <img src="../../assets/svg/pencil-square.svg" alt="" width="25" class="me-3">
+            <span class="text-dark text_underline">수정</span>
+          </h5>
+        </button>
+      </div>
+      <div class="col-xs-6 col-md-2">
+        <button class="btn btn-group-lg btn-outline-light mt-3" ng-click="removeProduct()">
+          <h5 class="fw-7 d-flex align-items-center justify-content-center">
+            <img src="../../assets/svg/dash-circle.svg" alt="" width="25" class="me-3">
+            <span class="text-danger text_underline" >삭제</span>
+          </h5>
+        </button>
+      </div>
+      
+    </div>
+    <div class="modal fade" id="modifyModal" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title fw-7">상품 수정</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" ></button>
+          </div>
+
+          <div class="modal-body">
+            <div class="p-3 mb-2 rounded-3">
+              <div class="container-fluid py-2">
+                <div class="row">
+                  <div class="col-md-1 col-xs-4 d-flex">
+                    <h6 class="fw-7 d-flex align-items-center">이름</h6>
+                  </div>
+                  <div class="col-md-3 col-xs-8">
+                    <input type="text" class="form-control mt-2" value="{{productInfo.product_name}}" id="product_name">
+                  </div>
+                  <div class="col-md-1 col-xs-4 d-flex">
+                    <h6 class="fw-7 d-flex align-items-center mt-2">가격</h6>
+                  </div>
+                  <div class="col-md-3 col-xs-8">
+                    <input type="number" class="form-control mt-2" value="{{productInfo.product_price}}" id="product_price">
+                  </div>
+                  <div class="col-md-1 col-xs-4 d-flex">
+                    <h6 class="fw-7 d-flex align-items-center mt-2">메인 사진</h6>
+                  </div>
+                  <div class="col-md-3 col-xs-8">
+                    <div class="form-group mt-2">
+                      <input type="file" id="mainImage" accept="image/jpeg" class="form-control">
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row mt-3">
+                  <div class="col-md-4 col-xs-12">
+                    <h6 class="fw-7 d-flex align-items-center mb-3">주요 설명</h6>
+                    <textarea
+                    class="w-100 form-control"
+                    style="resize: none; height: 20vh"
+                    id="contentTextarea"
+                    ng-trim="false"
+                    >
+                   {{productInfo.product_content}}
+                    
+                    </textarea>
+                  </div>
+                  <div class="col-md-4 col-xs-12">
+                    <h6 class="fw-7 d-flex align-items-center mb-3">부가 설명</h6>
+                    <textarea
+                    class="w-100 form-control"
+                    style="resize: none; height: 20vh"
+                    id="subTextarea"
+                    ng-trim="false"
+                    >
+                   {{productInfo.product_subcontent}}
+                    
+                    </textarea>
+                  </div>
+
+                  <div class="col-md-4 col-xs-12 d-flex flex-column-reverse">
+                    <button class="btn btn-primary" ng-click="modifyProducts()">
+                      <h5 class="fw-7">수정</h5>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+
+<script>
+$(document).ready(() => {
+  let carouselImage = document.querySelector('#carouselImage');
+  let carousel = new bootstrap.Carousel(carouselImage, {
+    interval : 2000,
+    ride : true
+  });
+  let detailImage = document.querySelector('#detailImage');
+  let detailCarousel = new bootstrap.Carousel(detailImage, {
+    interval : 2000,
+    ride : true
+  });
+})
+
+$("#openModal").click(() => {
+  let contentTextareaEl = $('#contentTextarea');
+  let contentTrimVal = contentTextareaEl.val().trim();
+  contentTextareaEl.val(contentTrimVal);
+
+  let subTextareaEl = $('#subTextarea');
+  let subTrimVal = subTextareaEl.val().trim();
+  subTextareaEl.val(subTrimVal);
+})
+
+</script>

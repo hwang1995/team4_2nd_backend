@@ -1,0 +1,45 @@
+<div class="body">
+  <h1 class="fw-9 mt-3 ">배송 정보 수정</h1>
+  <hr class="divider mb-3">
+  <div>
+    <div class="form-group">
+      <label><h5>주문번호</h5></label>
+      <input class="form-control" ng-model="order.order_id" readonly/>
+    </div>
+    <div class="form-group mt-3">
+      <label><h5>수취인</h5></label>
+      <input class="form-control" ng-model="order.recipient_name" readonly/>
+    </div>
+    <div class="form-group mt-3">
+      <label><h5>연락처</h5></label>
+      <input class="form-control" ng-model="order.recipient_tel" readonly/>
+    </div>
+    <div class="form-group mt-3">
+      <label><h5>주소</h5></label>
+      <input class="form-control" ng-model="order.recipient_address"/>
+    </div>
+    <div class="form-group mt-3">
+      <label><h5>배송상태</h5></label>
+      <div>
+        <lable>
+          <input type="radio" ng-model="order.order_delivery_status" value="DELIVERY_COMPLETED"/>
+          배송완료
+        </lable>
+        <label class="ms-4">
+          <input type="radio" ng-model="order.order_delivery_status" value="DELIVERY_PENDING"/>
+          배송준비중
+        </label>
+      </div>
+      
+    </div>
+    <div class="d-flex justify-content-center mt-4">
+      <button class="btn btn-primary btn-sm" style="width: 100px;" ng-click="modifyOrder(order)">
+       <h5 class="fw-7">저장</h5> 
+      </button>
+      <button class="btn btn-primary btn-sm ms-3" style="width: 100px;" ng-click="read(order.order_id)">
+        <h5 class="fw-7">취소</h5> 
+      </button>
+    </div>
+    
+  </div>
+</div>

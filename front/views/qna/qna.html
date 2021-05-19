@@ -1,0 +1,125 @@
+<link rel="stylesheet" href="../../assets/css/layout/sidebarLayout.css">
+<div class="d-flex">
+  <ng-include src="'views/dashboard/sider.html'"></ng-include>
+
+  <section class="p-3 w-100">
+    <h2 class="fw-5 mt-3 ">Q&A 목록</h2>
+    <hr class="divider mb-2">
+    <div class="d-flex justify-content-center">
+      <div class="d-inline-block">
+        <div class="form-group d-flex align-items-center" style="border: 1px solid lightgray; padding: 10px;">
+          <table>
+            <tbody>
+              <tr>
+              <td>
+                <label for="actionSearch" style="width: 80px;">검색어:</label>
+              </td>
+              <td ng-mouseenter="handleMouseEventSearch($event)"
+                  ng-mouseleave="handleMouseEventSearch($event)">
+                <select id="actionSearch"
+                      class="form-control"
+                      ng-options="searchOption for searchOption in searchOptions"
+                      ng-model="searchOption"
+                      ng-change="setNull()"
+                      style="width: 200px;">
+                </select>
+              </td>
+              <td>
+                <input class="form-control ms-3"
+                      ng-model="search.email"
+                      ng-show="searchOption=='이메일'"
+                      style="width: 200px;"/>
+                <select class="form-control ms-3"
+                        ng-options="category for category in categorys"
+                        ng-model="search.category"
+                        ng-show="searchOption=='분류'"
+                        style="width: 200px;">
+                </select>
+                <select class="form-control ms-3"
+                        ng-options="answer for answer in answers"
+                        ng-model="search.answer"
+                        ng-show="searchOption=='답변상태'"
+                        style="width: 200px;">
+                </select>
+              </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="d-flex justify-content-center">
+          <button ng-disabled="!search.email && !search.category &&!search.answer"
+                  class="btn btn-primary btn-sm mt-2"
+                  ng-click="getList(1, search)"
+                  style="width: 100px;height: 40px;">검색</button>
+        </div>
+      </div>
+    </div>
+    <hr class="divider mb-2">
+      <table class="table table-bordered text-center">
+        <thead>
+          <tr style="background-color: #eee;">
+            <th scope="col" width="5%" style="border:1px solid #dee2e6;"></th>
+            <th scope="col" width="20%" style="border:1px solid #dee2e6;">이메일</th>
+            <th scope="col" width="10%" style="border:1px solid #dee2e6;">분류</th>
+            <th scope="col" width="58%" style="border:1px solid #dee2e6;">제목</th>
+            <th scope="col" width="7%" style="border:1px solid #dee2e6;">답변상태</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="qna in qnas"
+              ng-mouseenter="handleMouseEvent($event)"
+              ng-mouseleave="handleMouseEvent($event)">
+            <td scope="row" style="border:1px solid #dee2e6;"><button ng-click="read(qna.qna_id)" class="btn btn-outline-dark btn-sm" style="width: 70px; height: 30px;">상세보기</button></td>
+            <td scope="row" style="border:1px solid #dee2e6;">{{qna.member_email}}</td>
+            <td scope="row" style="border:1px solid #dee2e6;">{{qna.category_status}}</td>
+            <td scope="row" style="border:1px solid #dee2e6; text-align:left;">{{qna.qna_title}}</td>
+            <td scope="row" style="border:1px solid #dee2e6;font-size: 1.11rem;" ng-style="{'color': customColor(qna.answer_status)}">{{qna.answer_status}}</td>
+          </tr>
+        </tbody>
+ 
+      </table>
+      <div class="d-flex justify-content-center">
+        <nav >
+          <ul class="pagination justify-content-center" ng-show="!search_finished">
+            <li class="page-item">
+              <a class="page-link" ng-click="getList(1)">처음</a>
+            </li>
+            <li class="page-item">
+              <a class="page-link" ng-show="pager.groupNo>1" ng-click="getList(pager.startPageNo-1)">이전</a>
+            </li>
+            <li class="page-item {{(pager.pageNo==i)?'active':''}} {{!$last?'mr-1':''}}" ng-repeat="i in pageRange">
+              <a class="page-link"  ng-click="getList(i)" >{{i}}</a>
+            </li>
+            <li class="page-item">
+              <a class="page-link" ng-show="pager.groupNo < pager.totalGroupNo" ng-click="getList(pager.endPageNo+1)">다음</a>
+            </li>
+            <li class="page-item">
+              <a class="page-link" ng-click="getList(pager.totalPageNo)">맨끝</a>
+            </li>
+         
+          </ul>
+        </nav>
+      </div>
+      <div class="d-flex justify-content-center" ng-show="search_finished">
+        <nav >
+          <ul class="pagination justify-content-center" >
+            <li class="page-item">
+              <a class="page-link" ng-click="getList(1, search)">처음</a>
+            </li>
+            <li class="page-item">
+              <a class="page-link" ng-show="pager.groupNo>1" ng-click="getList(pager.startPageNo-1, search)">이전</a>
+            </li>
+            <li class="page-item {{(pager.pageNo==i)?'active':''}} {{!$last?'mr-1':''}}" ng-repeat="i in pageRange">
+              <a class="page-link"  ng-click="getList(i, search)" >{{i}}</a>
+            </li>
+            <li class="page-item">
+              <a class="page-link" ng-show="pager.groupNo < pager.totalGroupNo" ng-click="getList(pager.endPageNo+1, search)">다음</a>
+            </li>
+            <li class="page-item">
+              <a class="page-link" ng-click="getList(pager.totalPageNo, search)">맨끝</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+  </section>
+</div>
